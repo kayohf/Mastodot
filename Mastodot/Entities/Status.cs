@@ -8,7 +8,7 @@ namespace Mastodot.Entities
     public class Status : BaseMastodonEntity, IStreamEntity
     {
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [JsonProperty("uri")]
         public string Uri { get; set; }

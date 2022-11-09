@@ -6,7 +6,7 @@ namespace Mastodot.Entities
     public class Account : BaseMastodonEntity
     {
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [JsonProperty("username")]
         public string UserName { get; set; }

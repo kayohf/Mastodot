@@ -473,7 +473,7 @@ namespace Mastodot
                 {"comment", comment}
             }.Select(x => new KeyValuePair<string, string>(x.Key, x.Value.ToString()))
             .ToList();
-            param.AddIntArrayParameter("status_ids", statusIds);
+            param.AddArrayParameter("status_ids", statusIds);
 
             return GetClient().Post<Report>(ApiMethods.ReportUser, param);
         }
@@ -584,7 +584,7 @@ namespace Mastodot
         /// <param name="sensitive">if this status media as NSFW, set <c>true</c></param>
         /// <param name="spoilerText">warning text</param>
         /// <param name="visibility">Visibility.</param>
-        public Task<Status> PostNewStatus(string status, int? inReplyToId = null, IEnumerable<int> mediaIds = null, bool? sensitive = default(bool?), string spoilerText = null, Enums.Visibility visibility = Enums.Visibility.Public)
+        public Task<Status> PostNewStatus(string status, int? inReplyToId = null, IEnumerable<long> mediaIds = null, bool? sensitive = default(bool?), string spoilerText = null, Enums.Visibility visibility = Enums.Visibility.Public)
         {
             var param = new Dictionary<string, object>
             {
@@ -599,7 +599,7 @@ namespace Mastodot
 
             if (mediaIds != null)
             {
-                param.AddIntArrayParameter("media_ids", mediaIds);
+                param.AddArrayParameter("media_ids", mediaIds);
             }
 
             return GetClient().Post<Status>(ApiMethods.PostNewStatus, param);
@@ -822,7 +822,7 @@ namespace Mastodot
             return $"{kvp.Key}={System.Net.WebUtility.UrlEncode(kvp.Value.ToString())}";
         }
 
-        public static ICollection<KeyValuePair<string, string>> AddIntArrayParameter(this ICollection<KeyValuePair<string, string>> self, string name, IEnumerable<int> arrayParam)
+        public static ICollection<KeyValuePair<string, string>> AddArrayParameter<T>(this ICollection<KeyValuePair<string, string>> self, string name, IEnumerable<T> arrayParam)
         {
             foreach (var item in arrayParam)
             {

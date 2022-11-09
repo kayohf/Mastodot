@@ -7,7 +7,7 @@ namespace Mastodot.Entities
     public class Relationship : BaseMastodonEntity
     {
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         [JsonProperty("following")]
         public bool Following { get; set; }
